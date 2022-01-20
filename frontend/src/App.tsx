@@ -1,6 +1,7 @@
+
 function App() {
   return (
-    <h1>página</h1>
+    <h1>pagina</h1>
   );
 }
 
