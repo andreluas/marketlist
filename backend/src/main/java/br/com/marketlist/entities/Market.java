@@ -34,19 +34,24 @@ public class Market implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "supermarket_id")
+    private Supermarket supermarket;
+    
     @OneToMany(mappedBy = "market")
     private Set<Product> products = new HashSet<>();
 
     public Market() {
     }
 
-    public Market(Long id, String title, String body, Instant date, Double total, User user) {
+    public Market(Long id, String title, String body, Instant date, Double total, User user, Supermarket supermarket) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.date = date;
         this.total = total;
         this.user = user;
+        this.supermarket = supermarket;
     }
 
     public Long getId() {
@@ -99,6 +104,14 @@ public class Market implements Serializable {
 
     public Set<Product> getProducts() {
         return products;
+    }
+    
+    public Supermarket getSupermarket() {
+        return supermarket;
+    }
+
+    public void setSupermarket(Supermarket supermarket) {
+        this.supermarket = supermarket;
     }
 
     @Override
