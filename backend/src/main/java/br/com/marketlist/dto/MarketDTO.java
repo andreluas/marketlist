@@ -23,18 +23,20 @@ public class MarketDTO implements Serializable {
     private Instant date;
     private Double total;
     private Long userId;
+    private Long supermarketId;
     private Set<ProductDTO> products = new HashSet<>();
 
     public MarketDTO() {
     }
 
-    public MarketDTO(Long id, String title, String body, Instant date, Double total, Long userId) {
+    public MarketDTO(Long id, String title, String body, Instant date, Double total, Long userId, Long supermarketId) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.date = date;
         this.total = total;
         this.userId = userId;
+        this.supermarketId = supermarketId;
     }
 
     public MarketDTO(Market entity) {
@@ -44,6 +46,7 @@ public class MarketDTO implements Serializable {
         date = entity.getDate();
         total = entity.getTotal();
         userId = entity.getUser().getId();
+        supermarketId = entity.getSupermarket().getId();
         entity.getProducts().forEach(product -> this.products.add(new ProductDTO(product)));
     }
 
@@ -93,6 +96,14 @@ public class MarketDTO implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getSupermarketId() {
+        return supermarketId;
+    }
+
+    public void setSupermarketId(Long supermarketId) {
+        this.supermarketId = supermarketId;
     }
 
     public Set<ProductDTO> getProducts() {
