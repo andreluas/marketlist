@@ -61,6 +61,13 @@ public class UserService implements UserDetailsService {
         return new UserDTO(entity);
     }
 
+    // Profile
+    @Transactional(readOnly = true)
+    public UserDTO profile() {
+        User entity = authService.authenticated();
+        return new UserDTO(entity);
+    }
+
     // Insert
     @Transactional
     public UserDTO insert(UserInsertDTO dto) {
