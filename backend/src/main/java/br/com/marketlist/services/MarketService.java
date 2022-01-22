@@ -13,13 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.marketlist.dto.MarketDTO;
-import br.com.marketlist.dto.ProductDTO;
 import br.com.marketlist.entities.Market;
-import br.com.marketlist.entities.Product;
 import br.com.marketlist.entities.Supermarket;
 import br.com.marketlist.entities.User;
 import br.com.marketlist.repositories.MarketRepository;
-import br.com.marketlist.repositories.ProductRepository;
 import br.com.marketlist.repositories.SupermarketRepository;
 import br.com.marketlist.services.exceptions.DataBaseException;
 import br.com.marketlist.services.exceptions.ResourceNotFoundException;
@@ -29,9 +26,6 @@ public class MarketService {
 
     @Autowired
     private MarketRepository repository;
-
-    @Autowired
-    private ProductRepository productRepository;
 
     @Autowired
     private SupermarketRepository supermarketRepository;
@@ -93,13 +87,6 @@ public class MarketService {
     private void copyDtoToEntity(MarketDTO dto, Market entity) {
         entity.setTitle(dto.getTitle());
         entity.setBody(dto.getBody());
-        entity.setDate(dto.getDate());
         entity.setTotal(dto.getTotal());
-
-        entity.getProducts().clear();
-        for (ProductDTO productDto : dto.getProducts()) {
-            Product product = productRepository.getById(productDto.getId());
-            entity.getProducts().add(product);
-        }
     }
 }

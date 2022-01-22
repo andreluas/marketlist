@@ -37,7 +37,7 @@ public class Market implements Serializable {
     @ManyToOne
     @JoinColumn(name = "supermarket_id")
     private Supermarket supermarket;
-    
+
     @OneToMany(mappedBy = "market")
     private Set<Product> products = new HashSet<>();
 
@@ -105,7 +105,7 @@ public class Market implements Serializable {
     public Set<Product> getProducts() {
         return products;
     }
-    
+
     public Supermarket getSupermarket() {
         return supermarket;
     }
