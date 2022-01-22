@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.marketlist.entities.Supermarket;
 
 @Repository
-public interface SupermarketRepository extends JpaRepository<Long, Supermarket> {
+public interface SupermarketRepository extends JpaRepository<Supermarket, Long> {
     
 }
