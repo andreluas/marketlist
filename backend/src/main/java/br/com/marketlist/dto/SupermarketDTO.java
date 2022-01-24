@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.marketlist.entities.Market;
+import br.com.marketlist.entities.Supermarket;
 
 public class SupermarketDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -12,7 +12,8 @@ public class SupermarketDTO implements Serializable {
     private Long id;
     private String name;
     private String img;
-    private List<Market> markets = new ArrayList<>();
+    
+    List<MarketDTO> markets = new ArrayList<>();
 
     public SupermarketDTO() {
     }
@@ -21,6 +22,13 @@ public class SupermarketDTO implements Serializable {
         this.id = id;
         this.name = name;
         this.img = img;
+    }
+
+    public SupermarketDTO(Supermarket entity) {
+        id = entity.getId();
+        name = entity.getName();
+        img = entity.getImg();
+        entity.getMarkets().forEach(market -> this.markets.add(new MarketDTO(market)));
     }
 
     public Long getId() {
@@ -47,7 +55,7 @@ public class SupermarketDTO implements Serializable {
         this.img = img;
     }
 
-    public List<Market> getMarkets() {
+    public List<MarketDTO> getMarkets() {
         return markets;
     }
 

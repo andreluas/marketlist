@@ -24,7 +24,8 @@ public class MarketDTO implements Serializable {
     private Double total;
     private Long userId;
     private Long supermarketId;
-    private Set<ProductDTO> products = new HashSet<>();
+    
+    Set<ProductDTO> products = new HashSet<>();
 
     public MarketDTO() {
     }
