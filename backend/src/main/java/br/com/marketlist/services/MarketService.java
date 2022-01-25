@@ -18,6 +18,7 @@ import br.com.marketlist.entities.Supermarket;
 import br.com.marketlist.entities.User;
 import br.com.marketlist.repositories.MarketRepository;
 import br.com.marketlist.repositories.SupermarketRepository;
+import br.com.marketlist.repositories.UserRepository;
 import br.com.marketlist.services.exceptions.DataBaseException;
 import br.com.marketlist.services.exceptions.ResourceNotFoundException;
 
@@ -29,6 +30,9 @@ public class MarketService {
 
     @Autowired
     private SupermarketRepository supermarketRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private AuthService authService;
@@ -54,7 +58,9 @@ public class MarketService {
     public MarketDTO insert(MarketDTO dto) {
         Market entity = new Market();
         Supermarket supermarket = supermarketRepository.getById(dto.getSupermarketId());
+        User user = userRepository.getById(dto.getUserId());
         entity.setSupermarket(supermarket);
+        entity.setUser(user);
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return new MarketDTO(entity);
@@ -72,8 +78,8 @@ public class MarketService {
         }
     }
 
-     // Delete
-     public void delete(Long id) {
+    // Delete
+    public void delete(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
