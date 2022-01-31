@@ -57,10 +57,13 @@ public class MarketService {
     @Transactional
     public MarketDTO insert(MarketDTO dto) {
         Market entity = new Market();
+
         Supermarket supermarket = supermarketRepository.getById(dto.getSupermarketId());
-        User user = userRepository.getById(dto.getUserId());
         entity.setSupermarket(supermarket);
+
+        User user = userRepository.getById(dto.getUserId());
         entity.setUser(user);
+
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return new MarketDTO(entity);
